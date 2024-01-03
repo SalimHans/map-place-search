@@ -1,6 +1,7 @@
 import React from "react"
-import { Text } from "react-native"
+
+import { Home } from "~screens"
 
 export default function App() {
-  return <Text>App.js</Text>
+  return <Home />
 }
