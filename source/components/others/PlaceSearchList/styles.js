@@ -15,5 +15,9 @@ export default styles = StyleSheet.create({
   },
   placeFlatList: {
     backgroundColor: "white"
+  },
+  loadingRow: {
+    backgroundColor: "white",
+    paddingVertical: normalize(8)
   }
 })

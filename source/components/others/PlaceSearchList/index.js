@@ -3,6 +3,7 @@ import { FlatList, View } from "react-native"
 
 import { debounce } from "lodash"
 import { useDispatch, useSelector } from "react-redux"
+import { ActivityIndicator } from "@ant-design/react-native"
 
 import styles from "./styles"
 import { fetchPlacesBySearchInput } from "~redux/state/places/placesSlice"
@@ -13,7 +14,7 @@ import HorizontalLineSeparator from "../HorizontalLineSeparator"
 
 export default function PlaceSearchList({}) {
   const dispatch = useDispatch()
-  const { listSearchPlaces } = useSelector((state) => state.places)
+  const { isLoading, listSearchPlaces } = useSelector((state) => state.places)
 
   const searchPlaceDebounce = useCallback(debounce(handleSearchInputChange, 500), [])
 
@@ -31,14 +32,20 @@ export default function PlaceSearchList({}) {
   return (
     <View style={styles.container}>
       <SearchTextInput style={styles.searchTextInput} onChange={searchPlaceDebounce} />
-      <FlatList
-        style={styles.placeFlatList}
-        contentContainerStyle={styles.placeFlatListContent}
-        data={listSearchPlaces}
-        keyExtractor={(_, index) => index}
-        renderItem={renderPlaceItem}
-        ItemSeparatorComponent={<HorizontalLineSeparator />}
-      />
+      {!isLoading ? (
+        <FlatList
+          style={styles.placeFlatList}
+          contentContainerStyle={styles.placeFlatListContent}
+          data={listSearchPlaces}
+          keyExtractor={(_, index) => index}
+          renderItem={renderPlaceItem}
+          ItemSeparatorComponent={<HorizontalLineSeparator />}
+        />
+      ) : (
+        <View style={styles.loadingRow}>
+          <ActivityIndicator />
+        </View>
+      )}
     </View>
   )
 }
