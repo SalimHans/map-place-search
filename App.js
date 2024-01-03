@@ -1,6 +1,6 @@
-import React from 'react';
-import {Text} from 'react-native';
+import React from "react"
+import { Text } from "react-native"
 
 export default function App() {
-  return <Text>App.js</Text>;
+  return <Text>App.js</Text>
 }
