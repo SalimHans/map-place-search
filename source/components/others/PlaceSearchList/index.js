@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useState } from "react"
 import { FlatList, View } from "react-native"
 
 import { debounce } from "lodash"
@@ -16,11 +16,19 @@ export default function PlaceSearchList({}) {
   const dispatch = useDispatch()
   const { isLoading, listSearchPlaces } = useSelector((state) => state.places)
 
-  const searchPlaceDebounce = useCallback(debounce(handleSearchInputChange, 500), [])
+  const [searchText, setSearchText] = useState(null)
+
+  const searchPlaceDebounce = useCallback(debounce(searchPlace, 500), [])
 
   // MARK: Events
   function handleSearchInputChange(value) {
-    dispatch(fetchPlacesBySearchInput())
+    setSearchText(value)
+    searchPlaceDebounce(value)
+  }
+
+  // MARK: Helpers
+  function searchPlace(value) {
+    dispatch(fetchPlacesBySearchInput(value))
   }
 
   // MARK: Render Methods
@@ -31,7 +39,11 @@ export default function PlaceSearchList({}) {
 
   return (
     <View style={styles.container}>
-      <SearchTextInput style={styles.searchTextInput} onChange={searchPlaceDebounce} />
+      <SearchTextInput
+        style={styles.searchTextInput}
+        value={searchText}
+        onChangeText={handleSearchInputChange}
+      />
       {!isLoading ? (
         <FlatList
           style={styles.placeFlatList}
