@@ -41,7 +41,7 @@ export default function PlaceSearchList({}) {
   }
 
   function renderSearchHistoryItem({ item }) {
-    return <PlaceHistoryRow title={item} />
+    return <PlaceHistoryRow title={item} onPress={() => setSearchText(item)} />
   }
 
   function renderContentLists() {
