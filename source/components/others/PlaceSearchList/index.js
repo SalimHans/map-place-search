@@ -37,6 +37,19 @@ export default function PlaceSearchList({}) {
     return <PlaceRow title={"Place Name"} address="Jalan Test, 1, Kuala Lumpur" />
   }
 
+  function renderContentLists() {
+    return searchText ? (
+      <FlatList
+        style={styles.placeFlatList}
+        contentContainerStyle={styles.placeFlatListContent}
+        data={listSearchPlaces}
+        keyExtractor={(_, index) => index}
+        renderItem={renderPlaceItem}
+        ItemSeparatorComponent={<HorizontalLineSeparator />}
+      />
+    ) : null
+  }
+
   return (
     <View style={styles.container}>
       <SearchTextInput
@@ -45,14 +58,7 @@ export default function PlaceSearchList({}) {
         onChangeText={handleSearchInputChange}
       />
       {!isLoading ? (
-        <FlatList
-          style={styles.placeFlatList}
-          contentContainerStyle={styles.placeFlatListContent}
-          data={listSearchPlaces}
-          keyExtractor={(_, index) => index}
-          renderItem={renderPlaceItem}
-          ItemSeparatorComponent={<HorizontalLineSeparator />}
-        />
+        renderContentLists()
       ) : (
         <View style={styles.loadingRow}>
           <ActivityIndicator />
