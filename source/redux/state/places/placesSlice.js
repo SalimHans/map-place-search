@@ -20,8 +20,13 @@ const appConfigSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(fetchPlacesBySearchInput.pending, (state, { meta }) => {
+      const searchText = meta?.arg
       state.isLoading = true
-      state.listSearchHistory.push(meta?.arg)
+
+      // Only push if item is not in the array already
+      if (!state.listSearchHistory.some((item) => item?.toLowerCase() === searchText?.toLowerCase())) {
+        state.listSearchHistory.push(searchText)
+      }
     })
     builder.addCase(fetchPlacesBySearchInput.fulfilled, (state, { payload }) => {
       state.isLoading = false
