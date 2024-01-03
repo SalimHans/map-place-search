@@ -1,4 +1,7 @@
 {
   "name": "MapPlaceSearch",
-  "displayName": "MapPlaceSearch"
+  "displayName": "MapPlaceSearch",
+  "packagerOpts": {
+    "config": "metro.config.js"
+  }
 }
