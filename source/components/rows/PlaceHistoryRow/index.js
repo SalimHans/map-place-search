@@ -1,12 +1,12 @@
 import React from "react"
-import { Text, View } from "react-native"
+import { Text, TouchableOpacity } from "react-native"
 
 import styles from "./styles"
 
-export default function PlaceHistoryRow({ style, title = "" }) {
+export default function PlaceHistoryRow({ style, title = "", onPress = () => {} }) {
   return (
-    <View style={[styles.row, style]}>
+    <TouchableOpacity style={[styles.row, style]} onPress={onPress}>
       <Text style={styles.placeTitle}>{title}</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
