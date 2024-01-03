@@ -6,7 +6,7 @@ export default styles = StyleSheet.create({
   searchInput: {
     backgroundColor: "white",
     paddingHorizontal: normalize(8),
-    paddingVertical: normalize(12),
+    paddingVertical: normalize(8),
     borderRadius: normalize(6)
   }
 })

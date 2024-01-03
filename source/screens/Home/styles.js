@@ -7,10 +7,11 @@ export default styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject
   },
   mapOverlay: {
-    flex: 1
+    flex: 1,
+    paddingVertical: normalize(12)
   },
   placeCard: {
     marginHorizontal: normalize(12),
-    marginBottom: normalize(12)
+    marginBottom: normalize(4)
   }
 })
