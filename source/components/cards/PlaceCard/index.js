@@ -15,7 +15,9 @@ export default function PlaceCard({ style }) {
           <Text style={styles.placeName} numberOfLines={2}>
             Place Name Some very very long place names
           </Text>
-          <Text style={styles.placeAddress}>Place Address</Text>
+          <Text style={styles.placeAddress} numberOfLines={2}>
+            Place Address
+          </Text>
         </View>
       </Flex>
     </View>
