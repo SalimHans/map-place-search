@@ -61,7 +61,11 @@ export default function PlaceSearchList({}) {
         data={listSearchHistory}
         keyExtractor={(_, index) => index}
         renderItem={renderSearchHistoryItem}
-        ListHeaderComponent={<Text style={styles.searchHistory}>Search History</Text>}
+        ListHeaderComponent={
+          listSearchHistory && listSearchHistory.length ? (
+            <Text style={styles.searchHistory}>Search History</Text>
+          ) : null
+        }
         ItemSeparatorComponent={<HorizontalLineSeparator />}
       />
     )
