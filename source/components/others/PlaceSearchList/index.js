@@ -9,12 +9,12 @@ import styles from "./styles"
 import { fetchPlacesBySearchInput } from "~redux/state/places/placesSlice"
 
 import { SearchTextInput } from "~components/fields"
-import { PlaceRow } from "~components/rows"
+import { PlaceHistoryRow, PlaceRow } from "~components/rows"
 import HorizontalLineSeparator from "../HorizontalLineSeparator"
 
 export default function PlaceSearchList({}) {
   const dispatch = useDispatch()
-  const { isLoading, listSearchPlaces } = useSelector((state) => state.places)
+  const { isLoading, listSearchPlaces, listSearchHistory } = useSelector((state) => state.places)
 
   const [searchText, setSearchText] = useState(null)
 
@@ -23,7 +23,10 @@ export default function PlaceSearchList({}) {
   // MARK: Events
   function handleSearchInputChange(value) {
     setSearchText(value)
-    searchPlaceDebounce(value)
+
+    if (value) {
+      searchPlaceDebounce(value)
+    }
   }
 
   // MARK: Helpers
@@ -37,6 +40,10 @@ export default function PlaceSearchList({}) {
     return <PlaceRow title={"Place Name"} address="Jalan Test, 1, Kuala Lumpur" />
   }
 
+  function renderSearchHistoryItem({ item }) {
+    return <PlaceHistoryRow title={item} />
+  }
+
   function renderContentLists() {
     return searchText ? (
       <FlatList
@@ -47,7 +54,16 @@ export default function PlaceSearchList({}) {
         renderItem={renderPlaceItem}
         ItemSeparatorComponent={<HorizontalLineSeparator />}
       />
-    ) : null
+    ) : (
+      <FlatList
+        style={styles.placeFlatList}
+        contentContainerStyle={styles.placeFlatListContent}
+        data={listSearchHistory}
+        keyExtractor={(_, index) => index}
+        renderItem={renderSearchHistoryItem}
+        ItemSeparatorComponent={<HorizontalLineSeparator />}
+      />
+    )
   }
 
   return (
