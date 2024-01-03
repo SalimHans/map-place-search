@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react"
-import { FlatList, View } from "react-native"
+import { FlatList, Text, View } from "react-native"
 
 import { debounce } from "lodash"
 import { useDispatch, useSelector } from "react-redux"
@@ -61,6 +61,7 @@ export default function PlaceSearchList({}) {
         data={listSearchHistory}
         keyExtractor={(_, index) => index}
         renderItem={renderSearchHistoryItem}
+        ListHeaderComponent={<Text style={styles.searchHistory}>Search History</Text>}
         ItemSeparatorComponent={<HorizontalLineSeparator />}
       />
     )
