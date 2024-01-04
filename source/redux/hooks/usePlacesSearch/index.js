@@ -6,7 +6,11 @@ import { fetchPlaceDetailsByPlaceId } from "~redux/state/places/selectedPlaceSli
 
 export default () => {
   const dispatch = useDispatch()
-  const { isLoading, listSearchPlaces, listSearchHistory } = useSelector((state) => state.places)
+  const {
+    isLoading: isFetchingPlaces,
+    listSearchPlaces,
+    listSearchHistory
+  } = useSelector((state) => state.places)
   const { selectedPlaceDetails } = useSelector((state) => state.selectedPlace)
 
   async function fetchPlacesByInput(input) {
@@ -24,7 +28,7 @@ export default () => {
   }
 
   return {
-    isLoading,
+    isFetchingPlaces,
     listSearchPlaces,
     listSearchHistory,
     selectedPlaceDetails,

@@ -12,7 +12,7 @@ import { PlaceHistoryRow, PlaceRow } from "~components/rows"
 import HorizontalLineSeparator from "../HorizontalLineSeparator"
 
 export default function PlaceSearchList({ style }) {
-  const { isLoading, listSearchPlaces, listSearchHistory, fetchPlacesByInput, fetchPlaceDetailsById } =
+  const { isFetchingPlaces, listSearchPlaces, listSearchHistory, fetchPlacesByInput, fetchPlaceDetailsById } =
     usePlacesSearch()
 
   const [searchText, setSearchText] = useState(null)
@@ -87,7 +87,7 @@ export default function PlaceSearchList({ style }) {
   return (
     <View style={[styles.container, style]}>
       <SearchTextInput style={styles.searchTextInput} value={searchText} onChangeText={setSearchText} />
-      {!isLoading ? (
+      {!isFetchingPlaces ? (
         renderContentLists()
       ) : (
         <View style={styles.loadingRow}>
