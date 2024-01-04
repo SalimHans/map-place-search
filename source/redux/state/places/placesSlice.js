@@ -89,15 +89,15 @@ const appConfigSlice = createSlice({
       state.listSearchPlaces = []
     })
 
-    // fetchPlaceDetailsById
-    builder.addCase(fetchPlaceDetailsById.pending, (state) => {
+    // fetchPlaceDetailsByPlaceId
+    builder.addCase(fetchPlaceDetailsByPlaceId.pending, (state) => {
       state.isLoading = true
     })
-    builder.addCase(fetchPlaceDetailsById.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchPlaceDetailsByPlaceId.fulfilled, (state, { payload }) => {
       state.isLoading = true
       state.selectedPlaceDetails = payload
     })
-    builder.addCase(fetchPlacesBySearchInput.rejected, (state, action) => {
+    builder.addCase(fetchPlaceDetailsByPlaceId.rejected, (state, action) => {
       // TODO: Add error here later
       state.isLoading = false
       state.selectedPlaceDetails = {}
