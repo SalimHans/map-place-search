@@ -30,6 +30,10 @@ const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (a
     const { data } = res || {}
 
     if (data?.status !== "OK") {
+      if (data?.status === "ZERO_RESULTS") {
+        throw new Error("No results found")
+      }
+
       throw new Error(data?.error_message)
     }
 
