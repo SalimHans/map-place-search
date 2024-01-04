@@ -6,7 +6,9 @@ import { normalize } from "~helpers/GlobalUtility"
 export default styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
-    padding: normalize(8)
+    padding: normalize(8),
+    minHeight: normalize(100),
+    justifyContent: "center"
   },
   placeImage: {
     width: normalize(100),

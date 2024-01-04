@@ -15,7 +15,7 @@ import { PlaceSearchList } from "~components/others"
 import { PlaceCard } from "~components/cards"
 
 export default function Home() {
-  const { selectedPlaceDetails } = usePlacesSearch()
+  const { selectedPlaceDetails, isFetchingPlaceDetails } = usePlacesSearch()
 
   // MARK: Render Methods
   function renderMapOverlay() {
@@ -29,7 +29,7 @@ export default function Home() {
   }
 
   function renderPlaceDetailsCard() {
-    if (isObjectEmpty(selectedPlaceDetails)) {
+    if (isObjectEmpty(selectedPlaceDetails) && !isFetchingPlaceDetails) {
       return null
     }
 
@@ -45,6 +45,7 @@ export default function Home() {
     return (
       <PlaceCard
         style={styles.placeCard}
+        isLoading={isFetchingPlaceDetails}
         placeName={selectedPlaceName}
         placeAddress={selectedPlaceAddress}
         placeImageSource={{ uri: placeImage.toString() }}
