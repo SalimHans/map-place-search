@@ -1,7 +1,7 @@
 import Config from "react-native-config"
 import { useDispatch, useSelector } from "react-redux"
 
-import { fetchPlacesBySearchInput } from "~redux/state/places/placesSlice"
+import { fetchPlacesBySearchInput, resetSeachHistory } from "~redux/state/places/placesSlice"
 import { fetchPlaceDetailsByPlaceId } from "~redux/state/places/selectedPlaceSlice"
 
 export default () => {
@@ -35,6 +35,10 @@ export default () => {
     }
   }
 
+  function resetPlaceSearchHistory() {
+    dispatch(resetSeachHistory())
+  }
+
   return {
     isFetchingPlaces,
     listSearchPlaces,
@@ -43,6 +47,7 @@ export default () => {
     selectedPlaceDetails,
 
     fetchPlacesByInput,
-    fetchPlaceDetailsById
+    fetchPlaceDetailsById,
+    resetPlaceSearchHistory
   }
 }
