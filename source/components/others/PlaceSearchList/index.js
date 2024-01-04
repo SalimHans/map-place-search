@@ -24,7 +24,8 @@ export default function PlaceSearchList({}) {
   function handleSearchInputChange(value) {
     setSearchText(value)
 
-    if (value) {
+    // Only start searching if text is more than 2 to save API call
+    if (value && value.length > 2) {
       searchPlaceDebounce(value)
     }
   }
