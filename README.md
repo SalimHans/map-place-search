@@ -24,6 +24,10 @@ npx react-native-asset
 npx pod-install
 ```
 
+### Adding the env file
+
+Add the _.env_ file to project root
+
 ### Running the app
 
 #### Android
