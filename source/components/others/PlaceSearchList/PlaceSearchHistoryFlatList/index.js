@@ -11,7 +11,7 @@ import { TextButton } from "~components/buttons"
 import HorizontalLineSeparator from "~components/others/HorizontalLineSeparator"
 
 export default function PlaceSearchHistoryFlatList({ onItemPress = () => {} }) {
-  const { listSearchHistory } = usePlacesSearch()
+  const { listSearchHistory, resetPlaceSearchHistory } = usePlacesSearch()
 
   // MARK: Render Methods
   function renderSearchHistoryItem({ item }) {
@@ -26,7 +26,11 @@ export default function PlaceSearchHistoryFlatList({ onItemPress = () => {} }) {
     return (
       <Flex justify="between" style={styles.headerContainer}>
         <Text style={styles.searchHistory}>Search History</Text>
-        <TextButton textStyle={styles.clearHistoryButtonText} text={"Clear History"} />
+        <TextButton
+          textStyle={styles.clearHistoryButtonText}
+          text={"Clear History"}
+          onPress={resetPlaceSearchHistory}
+        />
       </Flex>
     )
   }
