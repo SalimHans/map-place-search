@@ -26,10 +26,17 @@ export default function Home() {
     geometry
   } = selectedPlaceDetails || {}
   const { lat, lng } = geometry?.location || {}
-  const selectedPlaceCoordinate = { latitude: lat, longitude: lng }
+  const selectedPlaceCoordinate = {
+    latitude: lat ?? 0,
+    longitude: lng ?? 0,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421
+  }
 
   useEffect(() => {
-    setMapRegion(selectedPlaceCoordinate)
+    if (!isObjectEmpty(selectedPlaceDetails)) {
+      setMapRegion(selectedPlaceCoordinate)
+    }
   }, [selectedPlaceDetails])
 
   // MARK: Render Methods
