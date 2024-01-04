@@ -498,6 +498,8 @@ PODS:
     - React-jsi (= 0.72.8)
     - React-logger (= 0.72.8)
     - React-perflogger (= 0.72.8)
+  - RNCAsyncStorage (1.21.0):
+    - React-Core
   - RNCPicker (2.6.1):
     - React-Core
   - RNGestureHandler (2.14.0):
@@ -576,6 +578,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -685,6 +688,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
   RNGestureHandler:
@@ -748,6 +753,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 607a5832f8025dfe0d1178e78b447dd6d11bc012
   React-utils: 96f4588532614099a6d67a2b7c5912e1a35d6403
   ReactCommon: c111aa0c8006650d77a651e155f4112f97761dfd
+  RNCAsyncStorage: 618d03a5f52fbccb3d7010076bc54712844c18ef
   RNCPicker: b18aaf30df596e9b1738e7c1f9ee55402a229dca
   RNGestureHandler: 32a01c29ecc9bb0b5bf7bc0a33547f61b4dc2741
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
