@@ -71,7 +71,7 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1 }}>
-      <MapView style={styles.map} region={mapRegion} onRegionChangeComplete={setMapRegion}>
+      <MapView style={styles.map} region={mapRegion}>
         {selectedPlaceCoordinate ? (
           <Marker key={"locationMarker"} coordinate={selectedPlaceCoordinate} />
         ) : null}
