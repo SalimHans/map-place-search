@@ -42,6 +42,11 @@ const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (a
 const placesSlice = createSlice({
   name: "places",
   initialState,
+  reducers: {
+    resetSeachHistory: (state) => {
+      state.listSearchHistory = []
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPlacesBySearchInput.pending, (state, { meta }) => {
       const { searchText } = meta?.arg || {}
@@ -64,4 +69,5 @@ const placesSlice = createSlice({
 })
 
 export { fetchPlacesBySearchInput }
+export const { resetSeachHistory } = placesSlice.actions
 export default persistReducer(persistConfig, placesSlice.reducer)
