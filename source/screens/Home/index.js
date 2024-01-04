@@ -35,9 +35,9 @@ export default function Home() {
   // MARK: Render Methods
   function renderMapOverlay() {
     return (
-      <SafeAreaView style={styles.mapOverlay}>
+      <SafeAreaView style={styles.mapOverlay} pointerEvents="box-none">
         <PlaceSearchList />
-        <View style={GlobalStyles.flex} />
+        <View style={GlobalStyles.flex} pointerEvents="none" />
         {renderPlaceDetailsCard()}
       </SafeAreaView>
     )
@@ -64,7 +64,7 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1 }}>
-      <MapView style={styles.map} region={mapRegion} onRegionChange={setMapRegion}>
+      <MapView style={styles.map} region={mapRegion} onRegionChangeComplete={setMapRegion}>
         {selectedPlaceCoordinate ? (
           <Marker key={"locationMarker"} coordinate={selectedPlaceCoordinate} />
         ) : null}
