@@ -28,7 +28,7 @@ export default () => {
   async function fetchPlaceDetailsById(placeId) {
     try {
       await dispatch(
-        fetchPlaceDetailsByPlaceId({ placeId, googleAPIKey: "Config.GOOGLE_MAPS_API_KEY" })
+        fetchPlaceDetailsByPlaceId({ placeId, googleAPIKey: Config.GOOGLE_MAPS_API_KEY })
       ).unwrap()
     } catch (error) {
       throw error
