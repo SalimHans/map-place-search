@@ -23,6 +23,8 @@ export default function PlaceSearchList({ style }) {
     // Only start searching if text is more than 2 to save API call
     if (searchText && searchText?.length > 2) {
       searchPlaceDebounce(searchText)
+    } else {
+      resetListSearchPlaces()
     }
   }, [searchText])
 
