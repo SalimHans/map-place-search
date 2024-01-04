@@ -12,7 +12,8 @@ import PlaceSearchHistoryFlatList from "./PlaceSearchHistoryFlatList"
 import PlaceSearchFlatList from "./PlaceSearchFlatList"
 
 export default function PlaceSearchList({ style }) {
-  const { isFetchingPlaces, fetchPlacesByInput, fetchPlaceDetailsById } = usePlacesSearch()
+  const { isFetchingPlaces, fetchPlacesByInput, fetchPlaceDetailsById, resetListSearchPlaces } =
+    usePlacesSearch()
 
   const [searchText, setSearchText] = useState(null)
 
@@ -28,6 +29,8 @@ export default function PlaceSearchList({ style }) {
   async function onPlaceItemPressHandler(placeId) {
     try {
       await fetchPlaceDetailsById(placeId)
+      setSearchText(null)
+      resetListSearchPlaces()
     } catch (error) {
       Toast.info({ duration: 2, content: error?.message })
     }
