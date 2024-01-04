@@ -9,4 +9,10 @@ function normalize(size) {
   return Math.round(PixelRatio.roundToNearestPixel(newSize))
 }
 
-export { normalize }
+function isObjectEmpty(obj) {
+  if (!obj || (Object.keys(obj).length === 0 && obj.constructor === Object)) {
+    return true
+  }
+}
+
+export { normalize, isObjectEmpty }
