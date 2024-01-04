@@ -30,7 +30,7 @@ const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (a
     const { data } = res || {}
 
     if (data?.status !== "OK") {
-      throw data?.error_message
+      throw new Error(data?.error_message)
     }
 
     return data?.predictions
@@ -56,7 +56,7 @@ const appConfigSlice = createSlice({
       state.isLoading = false
       state.listSearchPlaces = payload
     })
-    builder.addCase(fetchPlacesBySearchInput.rejected, (state, action) => {
+    builder.addCase(fetchPlacesBySearchInput.rejected, (state) => {
       // TODO: Add error here later
       state.isLoading = false
       state.listSearchPlaces = []
