@@ -6,6 +6,9 @@ import MapView from "react-native-maps"
 import styles from "./styles"
 import { GlobalStyles } from "~helpers/GlobalStyles"
 import Utils from "~constants/Utils"
+import { isObjectEmpty } from "~helpers/GlobalUtility"
+import { constructGooglePhotoUrlByReference } from "~helpers/PlaceUtility"
+
 import usePlacesSearch from "~redux/hooks/usePlacesSearch"
 
 import { PlaceSearchList } from "~components/others"
@@ -14,21 +17,38 @@ import { PlaceCard } from "~components/cards"
 export default function Home() {
   const { selectedPlaceDetails } = usePlacesSearch()
 
-  const { name: selectedPlaceName, formatted_address: selectedPlaceAddress } = selectedPlaceDetails || {}
-
+  // MARK: Render Methods
   function renderMapOverlay() {
     return (
       <SafeAreaView style={styles.mapOverlay}>
         <PlaceSearchList />
         <View style={GlobalStyles.flex} />
-        {selectedPlaceDetails ? (
-          <PlaceCard
-            style={styles.placeCard}
-            placeName={selectedPlaceName}
-            placeAddress={selectedPlaceAddress}
-          />
-        ) : null}
+        {renderPlaceDetailsCard()}
       </SafeAreaView>
+    )
+  }
+
+  function renderPlaceDetailsCard() {
+    if (isObjectEmpty(selectedPlaceDetails)) {
+      return null
+    }
+
+    const {
+      name: selectedPlaceName,
+      formatted_address: selectedPlaceAddress,
+      photos: listPhotos = []
+    } = selectedPlaceDetails || {}
+
+    const firstPhoto = listPhotos[0]
+    const placeImage = constructGooglePhotoUrlByReference(firstPhoto?.photo_reference, 300)
+
+    return (
+      <PlaceCard
+        style={styles.placeCard}
+        placeName={selectedPlaceName}
+        placeAddress={selectedPlaceAddress}
+        placeImageSource={{ uri: placeImage.toString() }}
+      />
     )
   }
 
