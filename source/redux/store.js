@@ -1,4 +1,4 @@
-import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistStore } from "redux-persist"
+import { persistStore } from "redux-persist"
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
 
 import placeReducer from "./state/places/placesSlice"
