@@ -1,26 +1,38 @@
 This is a project to demonstrate simple Google places autocomplete search and displaying on map.
 
-## Step 1: Start the Metro Server
+## Requirements
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- Node 20.5.1 and above
+- npm
+- yarn
+- react-native-cli
+- XCode
+- XCode command line tools
+- Android Studio
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Getting Started
+
+First, setup your React Native environment here https://reactnative.dev/docs/environment-setup
+
+### Installing dependencies
+
+Run these commands to install the dependencies
 
 ```bash
-yarn start
+yarn install
+npx react-native-asset
+npx pod-install
 ```
 
-## Step 2: Start your Application
+### Running the app
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
+#### Android
 
 ```bash
 yarn android
 ```
 
-### For iOS
+#### iOS
 
 ```bash
 yarn ios
@@ -29,3 +41,11 @@ yarn ios
 If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+
+### Troubleshooting
+
+If metro is not running by automatically you may need to run this command before running the app
+
+```
+yarn start
+```
