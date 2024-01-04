@@ -16,6 +16,7 @@ export default styles = StyleSheet.create({
     color: Colors.LIGHT_BLUE_TEXT
   },
   flatList: {
+    maxHeight: normalize(300),
     backgroundColor: "white"
   }
 })
