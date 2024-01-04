@@ -12,7 +12,8 @@ import { PlaceHistoryRow, PlaceRow } from "~components/rows"
 import HorizontalLineSeparator from "../HorizontalLineSeparator"
 
 export default function PlaceSearchList({ style }) {
-  const { isLoading, listSearchPlaces, listSearchHistory, fetchPlacesByInput } = usePlacesSearch()
+  const { isLoading, listSearchPlaces, listSearchHistory, fetchPlacesByInput, fetchPlaceDetailsById } =
+    usePlacesSearch()
 
   const [searchText, setSearchText] = useState(null)
 
@@ -26,7 +27,7 @@ export default function PlaceSearchList({ style }) {
   }, [searchText])
 
   function onPlaceItemPressHandler(placeId) {
-    console.log("Place ID ", placeId)
+    fetchPlaceDetailsById(placeId)
   }
 
   // MARK: Helpers
