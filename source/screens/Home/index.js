@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { SafeAreaView, View } from "react-native"
 
 import MapView, { Marker } from "react-native-maps"
@@ -17,6 +17,8 @@ import { PlaceCard } from "~components/cards"
 export default function Home() {
   const { selectedPlaceDetails, isFetchingPlaceDetails } = usePlacesSearch()
 
+  const [mapRegion, setMapRegion] = useState(Utils.DEFAULT_MAP_REGION)
+
   const {
     name: selectedPlaceName,
     formatted_address: selectedPlaceAddress,
@@ -25,6 +27,10 @@ export default function Home() {
   } = selectedPlaceDetails || {}
   const { lat, lng } = geometry?.location || {}
   const selectedPlaceCoordinate = { latitude: lat, longitude: lng }
+
+  useEffect(() => {
+    setMapRegion(selectedPlaceCoordinate)
+  }, [selectedPlaceDetails])
 
   // MARK: Render Methods
   function renderMapOverlay() {
@@ -58,7 +64,7 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1 }}>
-      <MapView style={styles.map} initialRegion={Utils.DEFAULT_MAP_REGION}>
+      <MapView style={styles.map} region={mapRegion} onRegionChange={setMapRegion}>
         {selectedPlaceCoordinate ? (
           <Marker key={"locationMarker"} coordinate={selectedPlaceCoordinate} />
         ) : null}
