@@ -1,7 +1,7 @@
 import React from "react"
 import { SafeAreaView, View } from "react-native"
 
-import MapView from "react-native-maps"
+import MapView, { Marker } from "react-native-maps"
 
 import styles from "./styles"
 import { GlobalStyles } from "~helpers/GlobalStyles"
@@ -16,6 +16,15 @@ import { PlaceCard } from "~components/cards"
 
 export default function Home() {
   const { selectedPlaceDetails, isFetchingPlaceDetails } = usePlacesSearch()
+
+  const {
+    name: selectedPlaceName,
+    formatted_address: selectedPlaceAddress,
+    photos: listPhotos = [],
+    geometry
+  } = selectedPlaceDetails || {}
+  const { lat, lng } = geometry?.location || {}
+  const selectedPlaceCoordinate = { latitude: lat, longitude: lng }
 
   // MARK: Render Methods
   function renderMapOverlay() {
@@ -33,12 +42,6 @@ export default function Home() {
       return null
     }
 
-    const {
-      name: selectedPlaceName,
-      formatted_address: selectedPlaceAddress,
-      photos: listPhotos = []
-    } = selectedPlaceDetails || {}
-
     const firstPhoto = listPhotos[0]
     const placeImage = constructGooglePhotoUrlByReference(firstPhoto?.photo_reference)
 
@@ -55,7 +58,11 @@ export default function Home() {
 
   return (
     <View style={{ flex: 1 }}>
-      <MapView style={styles.map} initialRegion={Utils.DEFAULT_MAP_REGION} />
+      <MapView style={styles.map} initialRegion={Utils.DEFAULT_MAP_REGION}>
+        {selectedPlaceCoordinate ? (
+          <Marker key={"locationMarker"} coordinate={selectedPlaceCoordinate} />
+        ) : null}
+      </MapView>
       {renderMapOverlay()}
     </View>
   )
