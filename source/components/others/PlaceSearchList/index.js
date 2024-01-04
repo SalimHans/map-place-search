@@ -25,6 +25,10 @@ export default function PlaceSearchList({ style }) {
     }
   }, [searchText])
 
+  function onPlaceItemPressHandler(placeId) {
+    console.log("Place ID ", placeId)
+  }
+
   // MARK: Helpers
   function searchPlace(value) {
     fetchPlacesByInput(value)
@@ -32,10 +36,16 @@ export default function PlaceSearchList({ style }) {
 
   // MARK: Render Methods
   function renderPlaceItem({ item }) {
-    const { structured_formatting } = item || {}
+    const { structured_formatting, place_id } = item || {}
     const { main_text, secondary_text } = structured_formatting || {}
 
-    return <PlaceRow title={main_text} address={secondary_text} />
+    return (
+      <PlaceRow
+        title={main_text}
+        address={secondary_text}
+        onPress={() => onPlaceItemPressHandler(place_id)}
+      />
+    )
   }
 
   function renderSearchHistoryItem({ item }) {
