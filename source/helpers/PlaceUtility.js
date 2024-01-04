@@ -1,6 +1,6 @@
 import Config from "react-native-config"
 
-function constructGooglePhotoUrlByReference(photoReference, maxWidth) {
+function constructGooglePhotoUrlByReference(photoReference, maxWidth = 300) {
   let baseUrl = new URLSearchParams("https://maps.googleapis.com/maps/api/place/photo")
   baseUrl.set("maxwidth", maxWidth)
   baseUrl.set("photo_reference", photoReference)
