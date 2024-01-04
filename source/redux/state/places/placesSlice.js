@@ -45,6 +45,9 @@ const placesSlice = createSlice({
   reducers: {
     resetSeachHistory: (state) => {
       state.listSearchHistory = []
+    },
+    resetSearchPlaces: (state) => {
+      state.listSearchPlaces = []
     }
   },
   extraReducers: (builder) => {
@@ -69,5 +72,5 @@ const placesSlice = createSlice({
 })
 
 export { fetchPlacesBySearchInput }
-export const { resetSeachHistory } = placesSlice.actions
+export const { resetSeachHistory, resetSearchPlaces } = placesSlice.actions
 export default persistReducer(persistConfig, placesSlice.reducer)
