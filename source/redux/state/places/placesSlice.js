@@ -16,12 +16,27 @@ const initialState = {
 }
 
 // Action Thunks
-const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (args) => {
+const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (args, { rejectWithValue }) => {
   const { searchText, googleAPIKey } = args || {}
-  // TODO: We are just using jsonplaceholder for testing
-  // TODO: Change this to autocomplete
-  const res = await axios("https://jsonplaceholder.typicode.com/users")
-  return res?.data
+
+  try {
+    const params = {
+      input: searchText,
+      types: "establishment", // Only search for establishments,
+      key: googleAPIKey
+    }
+
+    const res = await axios("https://maps.googleapis.com/maps/api/place/autocomplete/json", { params })
+    const { data } = res || {}
+
+    if (data?.status !== "OK") {
+      throw data?.error_message
+    }
+
+    return data?.predictions
+  } catch (error) {
+    return rejectWithValue(error)
+  }
 })
 
 const appConfigSlice = createSlice({
@@ -42,6 +57,7 @@ const appConfigSlice = createSlice({
       state.listSearchPlaces = payload
     })
     builder.addCase(fetchPlacesBySearchInput.rejected, (state, action) => {
+      // TODO: Add error here later
       state.isLoading = false
       state.listSearchPlaces = []
     })
