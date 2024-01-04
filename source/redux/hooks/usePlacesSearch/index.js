@@ -10,7 +10,13 @@ export default () => {
   const { selectedPlaceDetails } = useSelector((state) => state.selectedPlace)
 
   async function fetchPlacesByInput(input) {
-    dispatch(fetchPlacesBySearchInput({ searchText: input, googleAPIKey: Config.GOOGLE_MAPS_API_KEY }))
+    try {
+      await dispatch(
+        fetchPlacesBySearchInput({ searchText: input, googleAPIKey: Config.GOOGLE_MAPS_API_KEY })
+      ).unwrap()
+    } catch (error) {
+      throw error
+    }
   }
 
   async function fetchPlaceDetailsById(placeId) {
