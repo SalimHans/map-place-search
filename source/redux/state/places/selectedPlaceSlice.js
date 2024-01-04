@@ -22,7 +22,7 @@ const fetchPlaceDetailsByPlaceId = createAsyncThunk(
       const { data } = res || {}
 
       if (data?.status !== "OK") {
-        throw data?.error_message
+        throw new Error(data?.error_message)
       }
 
       return data?.result
@@ -44,7 +44,6 @@ const appConfigSlice = createSlice({
       state.selectedPlaceDetails = payload
     })
     builder.addCase(fetchPlaceDetailsByPlaceId.rejected, (state, action) => {
-      // TODO: Add error here later
       state.isLoading = false
       state.selectedPlaceDetails = {}
     })

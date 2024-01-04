@@ -57,7 +57,6 @@ const appConfigSlice = createSlice({
       state.listSearchPlaces = payload
     })
     builder.addCase(fetchPlacesBySearchInput.rejected, (state) => {
-      // TODO: Add error here later
       state.isLoading = false
       state.listSearchPlaces = []
     })
