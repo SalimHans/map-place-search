@@ -31,9 +31,11 @@ export default function PlaceSearchList({ style }) {
   }
 
   // MARK: Render Methods
-  function renderPlaceItem({ item, index }) {
-    // TODO
-    return <PlaceRow title={"Place Name"} address="Jalan Test, 1, Kuala Lumpur" />
+  function renderPlaceItem({ item }) {
+    const { structured_formatting } = item || {}
+    const { main_text, secondary_text } = structured_formatting || {}
+
+    return <PlaceRow title={main_text} address={secondary_text} />
   }
 
   function renderSearchHistoryItem({ item }) {
