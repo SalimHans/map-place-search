@@ -2,19 +2,17 @@ import React, { useCallback, useState } from "react"
 import { FlatList, Text, View } from "react-native"
 
 import { debounce } from "lodash"
-import { useDispatch, useSelector } from "react-redux"
 import { ActivityIndicator } from "@ant-design/react-native"
 
 import styles from "./styles"
-import { fetchPlacesBySearchInput } from "~redux/state/places/placesSlice"
+import usePlacesSearch from "~redux/hooks/usePlacesSearch"
 
 import { SearchTextInput } from "~components/fields"
 import { PlaceHistoryRow, PlaceRow } from "~components/rows"
 import HorizontalLineSeparator from "../HorizontalLineSeparator"
 
 export default function PlaceSearchList({}) {
-  const dispatch = useDispatch()
-  const { isLoading, listSearchPlaces, listSearchHistory } = useSelector((state) => state.places)
+  const { isLoading, listSearchPlaces, listSearchHistory, fetchPlacesByInput } = usePlacesSearch()
 
   const [searchText, setSearchText] = useState(null)
 
@@ -32,7 +30,7 @@ export default function PlaceSearchList({}) {
 
   // MARK: Helpers
   function searchPlace(value) {
-    dispatch(fetchPlacesBySearchInput(value))
+    fetchPlacesByInput(value)
   }
 
   // MARK: Render Methods
