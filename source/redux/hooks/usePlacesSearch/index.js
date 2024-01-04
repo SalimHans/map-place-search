@@ -11,7 +11,9 @@ export default () => {
     listSearchPlaces,
     listSearchHistory
   } = useSelector((state) => state.places)
-  const { selectedPlaceDetails } = useSelector((state) => state.selectedPlace)
+  const { isLoading: isFetchingPlaceDetails, selectedPlaceDetails } = useSelector(
+    (state) => state.selectedPlace
+  )
 
   async function fetchPlacesByInput(input) {
     try {
@@ -24,13 +26,20 @@ export default () => {
   }
 
   async function fetchPlaceDetailsById(placeId) {
-    dispatch(fetchPlaceDetailsByPlaceId({ placeId, googleAPIKey: Config.GOOGLE_MAPS_API_KEY }))
+    try {
+      await dispatch(
+        fetchPlaceDetailsByPlaceId({ placeId, googleAPIKey: "Config.GOOGLE_MAPS_API_KEY" })
+      ).unwrap()
+    } catch (error) {
+      throw error
+    }
   }
 
   return {
     isFetchingPlaces,
     listSearchPlaces,
     listSearchHistory,
+    isFetchingPlaceDetails,
     selectedPlaceDetails,
 
     fetchPlacesByInput,

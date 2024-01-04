@@ -26,8 +26,12 @@ export default function PlaceSearchList({ style }) {
     }
   }, [searchText])
 
-  function onPlaceItemPressHandler(placeId) {
-    fetchPlaceDetailsById(placeId)
+  async function onPlaceItemPressHandler(placeId) {
+    try {
+      await fetchPlaceDetailsById(placeId)
+    } catch (error) {
+      Toast.info({ duration: 2, content: error?.message })
+    }
   }
 
   // MARK: Helpers
@@ -35,7 +39,7 @@ export default function PlaceSearchList({ style }) {
     try {
       await fetchPlacesByInput(value)
     } catch (error) {
-      Toast.info({ duration: 2, content: "error?.message" })
+      Toast.info({ duration: 2, content: error?.message })
     }
   }
 
