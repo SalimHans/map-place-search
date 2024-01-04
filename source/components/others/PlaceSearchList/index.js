@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { FlatList, Text, View } from "react-native"
 
 import { debounce } from "lodash"
@@ -18,15 +18,12 @@ export default function PlaceSearchList({ style }) {
 
   const searchPlaceDebounce = useCallback(debounce(searchPlace, 500), [])
 
-  // MARK: Events
-  function handleSearchInputChange(value) {
-    setSearchText(value)
-
+  useEffect(() => {
     // Only start searching if text is more than 2 to save API call
-    if (value && value.length > 2) {
-      searchPlaceDebounce(value)
+    if (searchText && searchText?.length > 2) {
+      searchPlaceDebounce(searchText)
     }
-  }
+  }, [searchText])
 
   // MARK: Helpers
   function searchPlace(value) {
@@ -72,11 +69,7 @@ export default function PlaceSearchList({ style }) {
 
   return (
     <View style={[styles.container, style]}>
-      <SearchTextInput
-        style={styles.searchTextInput}
-        value={searchText}
-        onChangeText={handleSearchInputChange}
-      />
+      <SearchTextInput style={styles.searchTextInput} value={searchText} onChangeText={setSearchText} />
       {!isLoading ? (
         renderContentLists()
       ) : (
