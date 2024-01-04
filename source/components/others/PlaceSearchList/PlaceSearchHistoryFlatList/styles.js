@@ -4,11 +4,16 @@ import Colors from "~constants/Colors"
 import { normalize } from "~helpers/GlobalUtility"
 
 export default styles = StyleSheet.create({
-  searchHistory: {
-    fontSize: normalize(14),
-    color: Colors.DARK_TEXT_COLOR,
+  headerContainer: {
     paddingHorizontal: normalize(8),
     paddingVertical: normalize(8)
+  },
+  searchHistory: {
+    fontSize: normalize(14),
+    color: Colors.DARK_TEXT_COLOR
+  },
+  clearHistoryButtonText: {
+    color: Colors.LIGHT_BLUE_TEXT
   },
   flatList: {
     backgroundColor: "white"

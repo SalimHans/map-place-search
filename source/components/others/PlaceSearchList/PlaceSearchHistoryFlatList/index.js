@@ -1,10 +1,13 @@
 import React from "react"
 import { FlatList, Text } from "react-native"
 
+import { Flex } from "@ant-design/react-native"
+
 import styles from "./styles"
 import usePlacesSearch from "~redux/hooks/usePlacesSearch"
 
 import { PlaceHistoryRow } from "~components/rows"
+import { TextButton } from "~components/buttons"
 import HorizontalLineSeparator from "~components/others/HorizontalLineSeparator"
 
 export default function PlaceSearchHistoryFlatList({ onItemPress = () => {} }) {
@@ -15,6 +18,19 @@ export default function PlaceSearchHistoryFlatList({ onItemPress = () => {} }) {
     return <PlaceHistoryRow title={item} onPress={() => onItemPress(item)} />
   }
 
+  function renderFlatlistHeader() {
+    if (!listSearchHistory || !listSearchHistory.length) {
+      return null
+    }
+
+    return (
+      <Flex justify="between" style={styles.headerContainer}>
+        <Text style={styles.searchHistory}>Search History</Text>
+        <TextButton textStyle={styles.clearHistoryButtonText} text={"Clear History"} />
+      </Flex>
+    )
+  }
+
   return (
     <FlatList
       style={styles.flatList}
@@ -22,11 +38,7 @@ export default function PlaceSearchHistoryFlatList({ onItemPress = () => {} }) {
       data={listSearchHistory}
       keyExtractor={(_, index) => index}
       renderItem={renderSearchHistoryItem}
-      ListHeaderComponent={
-        listSearchHistory && listSearchHistory.length ? (
-          <Text style={styles.searchHistory}>Search History</Text>
-        ) : null
-      }
+      ListHeaderComponent={renderFlatlistHeader()}
       ItemSeparatorComponent={<HorizontalLineSeparator />}
     />
   )
