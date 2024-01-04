@@ -40,7 +40,7 @@ const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (a
   }
 })
 
-const fetchPlaceDetailsById = createAsyncThunk(
+const fetchPlaceDetailsByPlaceId = createAsyncThunk(
   "places/fetchPlaceDetails",
   async (args, { rejectWithValue }) => {
     const { placeId, googleAPIKey } = args || {}
@@ -105,5 +105,5 @@ const appConfigSlice = createSlice({
   }
 })
 
-export { fetchPlacesBySearchInput, fetchPlaceDetailsById }
+export { fetchPlacesBySearchInput, fetchPlaceDetailsByPlaceId }
 export default persistReducer(persistConfig, appConfigSlice.reducer)
