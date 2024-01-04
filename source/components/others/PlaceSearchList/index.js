@@ -11,7 +11,7 @@ import { SearchTextInput } from "~components/fields"
 import { PlaceHistoryRow, PlaceRow } from "~components/rows"
 import HorizontalLineSeparator from "../HorizontalLineSeparator"
 
-export default function PlaceSearchList({}) {
+export default function PlaceSearchList({ style }) {
   const { isLoading, listSearchPlaces, listSearchHistory, fetchPlacesByInput } = usePlacesSearch()
 
   const [searchText, setSearchText] = useState(null)
@@ -71,7 +71,7 @@ export default function PlaceSearchList({}) {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <SearchTextInput
         style={styles.searchTextInput}
         value={searchText}
