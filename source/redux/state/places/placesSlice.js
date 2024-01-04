@@ -16,7 +16,8 @@ const initialState = {
 }
 
 // Action Thunks
-const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (searchText = "") => {
+const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (args) => {
+  const { searchText, googleAPIKey } = args || {}
   // TODO: We are just using jsonplaceholder for testing
   // TODO: Change this to autocomplete
   const res = await axios("https://jsonplaceholder.typicode.com/users")
@@ -28,7 +29,7 @@ const appConfigSlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(fetchPlacesBySearchInput.pending, (state, { meta }) => {
-      const searchText = meta?.arg
+      const { searchText } = meta?.arg || {}
       state.isLoading = true
 
       // Only push if item is not in the array already
