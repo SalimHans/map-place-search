@@ -39,7 +39,7 @@ const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (a
   }
 })
 
-const appConfigSlice = createSlice({
+const placesSlice = createSlice({
   name: "places",
   initialState,
   extraReducers: (builder) => {
@@ -64,4 +64,4 @@ const appConfigSlice = createSlice({
 })
 
 export { fetchPlacesBySearchInput }
-export default persistReducer(persistConfig, appConfigSlice.reducer)
+export default persistReducer(persistConfig, placesSlice.reducer)

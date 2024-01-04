@@ -32,7 +32,7 @@ const fetchPlaceDetailsByPlaceId = createAsyncThunk(
   }
 )
 
-const appConfigSlice = createSlice({
+const placesSlice = createSlice({
   name: "selectedPlace",
   initialState,
   extraReducers: (builder) => {
@@ -51,4 +51,4 @@ const appConfigSlice = createSlice({
 })
 
 export { fetchPlaceDetailsByPlaceId }
-export default appConfigSlice.reducer
+export default placesSlice.reducer
