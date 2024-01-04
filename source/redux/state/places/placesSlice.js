@@ -1,5 +1,13 @@
 import axios from "axios"
+import { persistReducer } from "redux-persist"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
+const persistConfig = {
+  key: "places",
+  storage: AsyncStorage,
+  whitelist: ["listSearchHistory"]
+}
 
 const initialState = {
   isLoading: false,
@@ -40,4 +48,4 @@ const appConfigSlice = createSlice({
 })
 
 export { fetchPlacesBySearchInput }
-export default appConfigSlice.reducer
+export default persistReducer(persistConfig, appConfigSlice.reducer)
