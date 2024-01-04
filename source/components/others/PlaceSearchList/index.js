@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react"
 import { FlatList, Text, View } from "react-native"
 
 import { debounce } from "lodash"
-import { ActivityIndicator } from "@ant-design/react-native"
+import { ActivityIndicator, Toast } from "@ant-design/react-native"
 
 import styles from "./styles"
 import usePlacesSearch from "~redux/hooks/usePlacesSearch"
@@ -31,8 +31,12 @@ export default function PlaceSearchList({ style }) {
   }
 
   // MARK: Helpers
-  function searchPlace(value) {
-    fetchPlacesByInput(value)
+  async function searchPlace(value) {
+    try {
+      await fetchPlacesByInput(value)
+    } catch (error) {
+      Toast.info({ duration: 2, content: "error?.message" })
+    }
   }
 
   // MARK: Render Methods
