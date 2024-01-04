@@ -40,7 +40,7 @@ export default function Home() {
     } = selectedPlaceDetails || {}
 
     const firstPhoto = listPhotos[0]
-    const placeImage = constructGooglePhotoUrlByReference(firstPhoto?.photo_reference, 300)
+    const placeImage = constructGooglePhotoUrlByReference(firstPhoto?.photo_reference)
 
     return (
       <PlaceCard

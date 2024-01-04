@@ -2,9 +2,11 @@ import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistStore } from 
 import { configureStore, combineReducers } from "@reduxjs/toolkit"
 
 import placeReducer from "./state/places/placesSlice"
+import selectedPlaceReducer from "./state/places/selectedPlaceSlice"
 
 const rootReducer = combineReducers({
-  places: placeReducer
+  places: placeReducer,
+  selectedPlace: selectedPlaceReducer
 })
 
 const store = configureStore({
