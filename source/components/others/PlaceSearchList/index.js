@@ -8,12 +8,12 @@ import styles from "./styles"
 import usePlacesSearch from "~redux/hooks/usePlacesSearch"
 
 import { SearchTextInput } from "~components/fields"
-import { PlaceHistoryRow, PlaceRow } from "~components/rows"
+import { PlaceRow } from "~components/rows"
 import HorizontalLineSeparator from "../HorizontalLineSeparator"
+import PlaceSearchHistoryFlatList from "./PlaceSearchHistoryFlatList"
 
 export default function PlaceSearchList({ style }) {
-  const { isFetchingPlaces, listSearchPlaces, listSearchHistory, fetchPlacesByInput, fetchPlaceDetailsById } =
-    usePlacesSearch()
+  const { isFetchingPlaces, listSearchPlaces, fetchPlacesByInput, fetchPlaceDetailsById } = usePlacesSearch()
 
   const [searchText, setSearchText] = useState(null)
 
@@ -57,10 +57,6 @@ export default function PlaceSearchList({ style }) {
     )
   }
 
-  function renderSearchHistoryItem({ item }) {
-    return <PlaceHistoryRow title={item} onPress={() => setSearchText(item)} />
-  }
-
   function renderContentLists() {
     return searchText ? (
       <FlatList
@@ -72,19 +68,7 @@ export default function PlaceSearchList({ style }) {
         ItemSeparatorComponent={<HorizontalLineSeparator />}
       />
     ) : (
-      <FlatList
-        style={styles.placeFlatList}
-        contentContainerStyle={styles.placeFlatListContent}
-        data={listSearchHistory}
-        keyExtractor={(_, index) => index}
-        renderItem={renderSearchHistoryItem}
-        ListHeaderComponent={
-          listSearchHistory && listSearchHistory.length ? (
-            <Text style={styles.searchHistory}>Search History</Text>
-          ) : null
-        }
-        ItemSeparatorComponent={<HorizontalLineSeparator />}
-      />
+      <PlaceSearchHistoryFlatList onItemPress={setSearchText} />
     )
   }
 
