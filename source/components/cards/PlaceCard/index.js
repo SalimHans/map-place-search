@@ -6,17 +6,17 @@ import { Flex } from "@ant-design/react-native"
 import styles from "./styles"
 import { Images } from "~assets/images"
 
-export default function PlaceCard({ style }) {
+export default function PlaceCard({ style, placeName = "", placeAddress = "" }) {
   return (
     <View style={[styles.card, style]}>
       <Flex align="start">
         <Image style={styles.placeImage} source={Images.EMPTY_IMAGE_PLACEHOLDER} />
         <View style={styles.placeDetails}>
           <Text style={styles.placeName} numberOfLines={2}>
-            Place Name Some very very long place names
+            {placeName}
           </Text>
-          <Text style={styles.placeAddress} numberOfLines={2}>
-            Place Address
+          <Text style={styles.placeAddress} numberOfLines={3}>
+            {placeAddress}
           </Text>
         </View>
       </Flex>
