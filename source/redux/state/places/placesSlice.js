@@ -94,7 +94,7 @@ const appConfigSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(fetchPlaceDetailsByPlaceId.fulfilled, (state, { payload }) => {
-      state.isLoading = true
+      state.isLoading = false
       state.selectedPlaceDetails = payload
     })
     builder.addCase(fetchPlaceDetailsByPlaceId.rejected, (state, action) => {
