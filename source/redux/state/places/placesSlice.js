@@ -12,7 +12,8 @@ const persistConfig = {
 const initialState = {
   isLoading: false,
   listSearchPlaces: [],
-  listSearchHistory: []
+  listSearchHistory: [],
+  selectedPlaceDetails: {}
 }
 
 // Action Thunks
@@ -39,10 +40,36 @@ const fetchPlacesBySearchInput = createAsyncThunk("places/fetchPlaces", async (a
   }
 })
 
+const fetchPlaceDetailsById = createAsyncThunk(
+  "places/fetchPlaceDetails",
+  async (args, { rejectWithValue }) => {
+    const { placeId, googleAPIKey } = args || {}
+
+    try {
+      const params = {
+        place_id: placeId,
+        key: googleAPIKey
+      }
+
+      const res = await axios("https://maps.googleapis.com/maps/api/place/details/json", { params })
+      const { data } = res || {}
+
+      if (data?.status !== "OK") {
+        throw data?.error_message
+      }
+
+      return data?.result
+    } catch (error) {
+      return rejectWithValue(error)
+    }
+  }
+)
+
 const appConfigSlice = createSlice({
   name: "places",
   initialState,
   extraReducers: (builder) => {
+    // fetchPlacesBySearchInput
     builder.addCase(fetchPlacesBySearchInput.pending, (state, { meta }) => {
       const { searchText } = meta?.arg || {}
       state.isLoading = true
@@ -61,8 +88,22 @@ const appConfigSlice = createSlice({
       state.isLoading = false
       state.listSearchPlaces = []
     })
+
+    // fetchPlaceDetailsById
+    builder.addCase(fetchPlaceDetailsById.pending, (state) => {
+      state.isLoading = true
+    })
+    builder.addCase(fetchPlaceDetailsById.fulfilled, (state, { payload }) => {
+      state.isLoading = true
+      state.selectedPlaceDetails = payload
+    })
+    builder.addCase(fetchPlacesBySearchInput.rejected, (state, action) => {
+      // TODO: Add error here later
+      state.isLoading = false
+      state.selectedPlaceDetails = {}
+    })
   }
 })
 
-export { fetchPlacesBySearchInput }
+export { fetchPlacesBySearchInput, fetchPlaceDetailsById }
 export default persistReducer(persistConfig, appConfigSlice.reducer)
